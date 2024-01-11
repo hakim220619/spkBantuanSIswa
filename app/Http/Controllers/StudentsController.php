@@ -23,7 +23,7 @@ class StudentsController extends Controller
     }
     public function load_data()
     {
-        $data = DB::table('students')->orderBy('hasil', 'desc')->get();
+        $data = DB::select("SELECT case when s.hasil >= 0.7 then 'LAYAK' else 'TIDAK LAYAK' end as hasil, s.id, s.nis, s.full_name, s.prt, s.jak, s.usia, s.ss, s.kk, s.bp, s.kr FROM students s ORDER BY s.hasil DESC");
         echo json_encode($data);
     }
     function UploadStudents(Request $request)
