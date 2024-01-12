@@ -23,7 +23,15 @@ class StudentsController extends Controller
     }
     public function load_data()
     {
-        $data = DB::select("SELECT case when s.hasil >= 0.7 then 'LAYAK' else 'TIDAK LAYAK' end as hasil, s.id, s.nis, s.full_name, s.prt, s.jak, s.usia, s.ss, s.kk, s.bp, s.kr FROM students s ORDER BY s.hasil DESC");
+        $data = DB::select("SELECT case when s.hasil >= 0.7 then 'LAYAK' else 'TIDAK LAYAK' end as hasil, s.id, s.nis, s.full_name,
+        (select jenis from detail_kriteria dk WHERE dk.nilai=s.prt and dk.keys_kriteria = '100' ) as prt,
+        (select jenis from detail_kriteria dk WHERE dk.nilai=s.jak and dk.keys_kriteria = '200' ) as jak,
+        (select jenis from detail_kriteria dk WHERE dk.nilai=s.usia and dk.keys_kriteria = '300' ) as usia,
+        (select jenis from detail_kriteria dk WHERE dk.nilai=s.ss and dk.keys_kriteria = '400' ) as ss,
+        (select jenis from detail_kriteria dk WHERE dk.nilai=s.kk and dk.keys_kriteria = '500' ) as kk,
+        (select jenis from detail_kriteria dk WHERE dk.nilai=s.bp and dk.keys_kriteria = '600' ) as bp,
+        (select jenis from detail_kriteria dk WHERE dk.nilai=s.kr and dk.keys_kriteria = '700' ) as kr
+        FROM students s ORDER BY s.hasil DESC");
         echo json_encode($data);
     }
     function UploadStudents(Request $request)

@@ -20,11 +20,35 @@ class LaporanController extends Controller
         $request = request();
         // dd($request['id']);
         if ($request['id'] == 'all') {
-            $data = DB::select("SELECT case when s.hasil >= 0.7 then 'LAYAK' else 'TIDAK LAYAK' end as hasil, s.id, s.nis, s.full_name, s.prt, s.jak, s.usia, s.ss, s.kk, s.bp, s.kr FROM students s ORDER BY s.hasil DESC");
+            $data = DB::select("SELECT case when s.hasil >= 0.7 then 'LAYAK' else 'TIDAK LAYAK' end as hasil, s.id, s.nis, s.full_name,
+        (select jenis from detail_kriteria dk WHERE dk.nilai=s.prt and dk.keys_kriteria = '100' ) as prt,
+        (select jenis from detail_kriteria dk WHERE dk.nilai=s.jak and dk.keys_kriteria = '200' ) as jak,
+        (select jenis from detail_kriteria dk WHERE dk.nilai=s.usia and dk.keys_kriteria = '300' ) as usia,
+        (select jenis from detail_kriteria dk WHERE dk.nilai=s.ss and dk.keys_kriteria = '400' ) as ss,
+        (select jenis from detail_kriteria dk WHERE dk.nilai=s.kk and dk.keys_kriteria = '500' ) as kk,
+        (select jenis from detail_kriteria dk WHERE dk.nilai=s.bp and dk.keys_kriteria = '600' ) as bp,
+        (select jenis from detail_kriteria dk WHERE dk.nilai=s.kr and dk.keys_kriteria = '700' ) as kr
+        FROM students s ORDER BY s.hasil DESC");
         } elseif (isset($request['id'])) {
-            $data = DB::select("SELECT case when s.hasil >= 0.7 then 'LAYAK' else 'TIDAK LAYAK' end as hasil, s.id, s.nis, s.full_name, s.prt, s.jak, s.usia, s.ss, s.kk, s.bp, s.kr FROM students s where id " . $request['id'] . " ORDER BY s.hasil DESC");
+            $data = DB::select("SELECT case when s.hasil >= 0.7 then 'LAYAK' else 'TIDAK LAYAK' end as hasil, s.id, s.nis, s.full_name,
+            (select jenis from detail_kriteria dk WHERE dk.nilai=s.prt and dk.keys_kriteria = '100' ) as prt,
+            (select jenis from detail_kriteria dk WHERE dk.nilai=s.jak and dk.keys_kriteria = '200' ) as jak,
+            (select jenis from detail_kriteria dk WHERE dk.nilai=s.usia and dk.keys_kriteria = '300' ) as usia,
+            (select jenis from detail_kriteria dk WHERE dk.nilai=s.ss and dk.keys_kriteria = '400' ) as ss,
+            (select jenis from detail_kriteria dk WHERE dk.nilai=s.kk and dk.keys_kriteria = '500' ) as kk,
+            (select jenis from detail_kriteria dk WHERE dk.nilai=s.bp and dk.keys_kriteria = '600' ) as bp,
+            (select jenis from detail_kriteria dk WHERE dk.nilai=s.kr and dk.keys_kriteria = '700' ) as kr
+            FROM students s where s.id = ".$request['id']." ORDER BY s.hasil DESC");
         } else {
-            $data = DB::select("SELECT case when s.hasil >= 0.7 then 'LAYAK' else 'TIDAK LAYAK' end as hasil, s.id, s.nis, s.full_name, s.prt, s.jak, s.usia, s.ss, s.kk, s.bp, s.kr FROM students s ORDER BY s.hasil DESC");
+            $data = DB::select("SELECT case when s.hasil >= 0.7 then 'LAYAK' else 'TIDAK LAYAK' end as hasil, s.id, s.nis, s.full_name,
+        (select jenis from detail_kriteria dk WHERE dk.nilai=s.prt and dk.keys_kriteria = '100' ) as prt,
+        (select jenis from detail_kriteria dk WHERE dk.nilai=s.jak and dk.keys_kriteria = '200' ) as jak,
+        (select jenis from detail_kriteria dk WHERE dk.nilai=s.usia and dk.keys_kriteria = '300' ) as usia,
+        (select jenis from detail_kriteria dk WHERE dk.nilai=s.ss and dk.keys_kriteria = '400' ) as ss,
+        (select jenis from detail_kriteria dk WHERE dk.nilai=s.kk and dk.keys_kriteria = '500' ) as kk,
+        (select jenis from detail_kriteria dk WHERE dk.nilai=s.bp and dk.keys_kriteria = '600' ) as bp,
+        (select jenis from detail_kriteria dk WHERE dk.nilai=s.kr and dk.keys_kriteria = '700' ) as kr
+        FROM students s ORDER BY s.hasil DESC");
         }
         // dd($data);
         echo json_encode($data);
@@ -34,7 +58,7 @@ class LaporanController extends Controller
         // dd($request->all());
         $sql = '';
         if ($request['id'] != 'all') {
-            $sql .= "where id = " . $request['id'] . "";
+            $sql .= "where s.id = " . $request['id'] . "";
         } elseif ($request['id'] == 'all') {
             $sql .= $request['id'] != null ? "where 1=1" : "";
         }
@@ -42,7 +66,15 @@ class LaporanController extends Controller
 
         // dd($sql);
         if ($request != "") {
-            $data = DB::select("SELECT case when s.hasil >= 0.7 then 'LAYAK' else 'TIDAK LAYAK' end as hasil, s.id, s.nis, s.full_name, s.prt, s.jak, s.usia, s.ss, s.kk, s.bp, s.kr FROM students s $sql ORDER BY s.hasil DESC");
+            $data = DB::select("SELECT case when s.hasil >= 0.7 then 'LAYAK' else 'TIDAK LAYAK' end as hasil, s.id, s.nis, s.full_name,
+            (select jenis from detail_kriteria dk WHERE dk.nilai=s.prt and dk.keys_kriteria = '100' ) as prt,
+            (select jenis from detail_kriteria dk WHERE dk.nilai=s.jak and dk.keys_kriteria = '200' ) as jak,
+            (select jenis from detail_kriteria dk WHERE dk.nilai=s.usia and dk.keys_kriteria = '300' ) as usia,
+            (select jenis from detail_kriteria dk WHERE dk.nilai=s.ss and dk.keys_kriteria = '400' ) as ss,
+            (select jenis from detail_kriteria dk WHERE dk.nilai=s.kk and dk.keys_kriteria = '500' ) as kk,
+            (select jenis from detail_kriteria dk WHERE dk.nilai=s.bp and dk.keys_kriteria = '600' ) as bp,
+            (select jenis from detail_kriteria dk WHERE dk.nilai=s.kr and dk.keys_kriteria = '700' ) as kr
+            FROM students s $sql ORDER BY s.hasil DESC");
         }
 
         $spreadsheet = new Spreadsheet();
@@ -93,7 +125,7 @@ class LaporanController extends Controller
             $sheet->setCellValue('F' . $rows, $pemDetails->kk);
             $sheet->setCellValue('G' . $rows, $pemDetails->bp);
             $sheet->setCellValue('H' . $rows, $pemDetails->kr);
-            $sheet->setCellValue('I' . $rows, number_format((float)$pemDetails->hasil, 2, '.', ''));
+            $sheet->setCellValue('I' . $rows, $pemDetails->hasil);
             $rows++;
         }
         $Sheet = $spreadsheet->getActiveSheet();

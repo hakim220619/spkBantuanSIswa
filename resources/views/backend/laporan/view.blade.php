@@ -201,7 +201,7 @@
                             '<td>' + data[i].kk + '</td>' +
                             '<td>' + data[i].bp + '</td>' +
                             '<td>' + data[i].kr + '</td>' +
-                            '<td>' + parseFloat(data[i].hasil).toFixed(2) + '</td>' +
+                            '<td>' + data[i].hasil + '</td>' +
                             '</tr>';
                     }
                     // console.log(html);

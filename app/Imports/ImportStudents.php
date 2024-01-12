@@ -49,9 +49,7 @@ class ImportStudents implements ToModel, WithHeadingRow
         }
 
         $usia = 0;
-        if ($row['usia'] <= 50) {
-            $usia = 0.5;
-        } elseif (in_array($row['usia'], range(50, 60))) {
+        if ($row['usia'] <= 60) {
             $usia = 0.6;
         } elseif (in_array($row['usia'], range(60, 70))) {
             $usia = 0.7;
@@ -62,55 +60,44 @@ class ImportStudents implements ToModel, WithHeadingRow
         } elseif (in_array($row['usia'], range(90, 100))) {
             $usia = 1;
         }
-        
-
-       
 
         $ss = 0;
-        if ($row['status_sosial'] <= 60) {
-            $ss = 0.6;
-        } elseif (in_array($row['status_sosial'], range(60, 70))) {
-            $ss = 0.6;
-        } elseif (in_array($row['status_sosial'], range(70, 80))) {
+        if ($row['status_sosial'] <= 70) {
             $ss = 0.7;
-        } elseif (in_array($row['status_sosial'], range(80, 90))) {
+        } elseif (in_array($row['status_sosial'], range(70, 80))) {
             $ss = 0.8;
-        } elseif (in_array($row['status_sosial'], range(90, 100))) {
+        } elseif (in_array($row['status_sosial'], range(80, 90))) {
             $ss = 0.9;
+        } elseif (in_array($row['status_sosial'], range(90, 100))) {
+            $ss = 1;
         } 
 
-
-       
-
-
         $kk = 0;
-        if ($row['kondisi_kesehatan'] <= 60) {
-            $kk = 0.6;
-        } elseif (in_array($row['kondisi_kesehatan'], range(60, 80))) {
+        if ($row['kondisi_kesehatan'] <= 70) {
+            $kk = 0.7;
+        } elseif (in_array($row['kondisi_kesehatan'], range(70, 80))) {
             $kk = 0.8;
-        } elseif (in_array($row['kondisi_kesehatan'], range(80, 100))) {
+        } elseif (in_array($row['kondisi_kesehatan'], range(80, 90))) {
             $kk = 1;
         } 
 
         $bp = 0;
-        if ($row['bobot_pekerjaan'] <= 60) {
-            $bp = 0.6;
-        } elseif (in_array($row['bobot_pekerjaan'], range(60, 70))) {
-            $bp = 0.6;
-        } elseif (in_array($row['bobot_pekerjaan'], range(70, 80))) {
+        if ($row['bobot_pekerjaan'] <= 70) {
             $bp = 0.7;
-        } elseif (in_array($row['bobot_pekerjaan'], range(80, 90))) {
+        } elseif (in_array($row['bobot_pekerjaan'], range(70, 80))) {
             $bp = 0.8;
-        } elseif (in_array($row['bobot_pekerjaan'], range(90, 100))) {
+        } elseif (in_array($row['bobot_pekerjaan'], range(80, 90))) {
             $bp = 0.9;
+        } elseif (in_array($row['bobot_pekerjaan'], range(90, 100))) {
+            $bp = 1;
         } 
 
         $kr = 0;
-        if ($row['kondisi_rumah'] <= 60) {
-            $kr = 0.6;
-        } elseif (in_array($row['kondisi_rumah'], range(60, 80))) {
+        if ($row['kondisi_rumah'] <= 80) {
             $kr = 0.8;
-        } elseif (in_array($row['kondisi_rumah'], range(80, 100))) {
+        } elseif (in_array($row['kondisi_rumah'], range(80, 90))) {
+            $kr = 0.9;
+        } elseif (in_array($row['kondisi_rumah'], range(90, 100))) {
             $kr = 1;
         } 
 
