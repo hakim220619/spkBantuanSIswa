@@ -63,7 +63,6 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nis</th>
                                         <th>Full Name</th>
                                         <th>P Rumah Tangga</th>
                                         <th>J Anggota Keluarga</th>
@@ -156,7 +155,6 @@
                     for (i = 0; i < data.length; i++) {
                         html += '<tr>' +
                             '<td>' + no++ + '</td>' +
-                            '<td>' + data[i].nis + '</td>' +
                             '<td>' + data[i].full_name + '</td>' +
                             '<td>' + data[i].prt + '</td>' +
                             '<td>' + data[i].jak + '</td>' +
@@ -192,7 +190,6 @@
                     for (i = 0; i < data.length; i++) {
                         html += '<tr>' +
                             '<td>' + no++ + '</td>' +
-                            '<td>' + data[i].nis + '</td>' +
                             '<td>' + data[i].full_name + '</td>' +
                             '<td>' + data[i].prt + '</td>' +
                             '<td>' + data[i].jak + '</td>' +

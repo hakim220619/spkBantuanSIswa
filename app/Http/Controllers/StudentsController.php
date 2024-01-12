@@ -23,7 +23,7 @@ class StudentsController extends Controller
     }
     public function load_data()
     {
-        $data = DB::select("SELECT case when s.hasil >= 0.7 then 'LAYAK' else 'TIDAK LAYAK' end as hasil, s.id, s.nis, s.full_name,
+        $data = DB::select("SELECT case when s.hasil >= 0.7 then 'LAYAK' else 'TIDAK LAYAK' end as hasil, s.id, s.full_name,
         (select jenis from detail_kriteria dk WHERE dk.nilai=s.prt and dk.keys_kriteria = '100' ) as prt,
         (select jenis from detail_kriteria dk WHERE dk.nilai=s.jak and dk.keys_kriteria = '200' ) as jak,
         (select jenis from detail_kriteria dk WHERE dk.nilai=s.usia and dk.keys_kriteria = '300' ) as usia,
@@ -76,7 +76,6 @@ class StudentsController extends Controller
     {
         // dd($request->all());
         DB::table('students')->insert([
-            'nis' => $request['nis'],
             'full_name' => $request['full_name'],
             'prt' => $request['prt'],
             'jak' => $request['jak'],

@@ -46,7 +46,6 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nis</th>
                                         <th>Full Name</th>
                                         <th>P Rumah Tangga</th>
                                         <th>J Anggota Keluarga</th>
@@ -112,13 +111,6 @@
                     @csrf
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="mb-3">
-                                    <label class="form-label" for="full_name">Nis</label>
-                                    <input type="number" class="form-control" id="nis" name="nis"
-                                        placeholder="Masukan" required />
-                                </div>
-                            </div>
                             <div class="col-md-4">
                                 <div class="mb-3">
                                     <label class="form-label" for="full_name">Nama</label>
@@ -259,7 +251,6 @@
                     for (i = 0; i < data.length; i++) {
                         html += '<tr>' +
                             '<td>' + no++ + '</td>' +
-                            '<td>' + data[i].nis + '</td>' +
                             '<td>' + data[i].full_name + '</td>' +
                             '<td>' + data[i].prt + '</td>' +
                             '<td>' + data[i].jak + '</td>' +
