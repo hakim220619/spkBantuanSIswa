@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 12 Jan 2024 pada 13.41
+-- Waktu pembuatan: 12 Jan 2024 pada 14.17
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.1.25
 
@@ -192,7 +192,6 @@ CREATE TABLE `personal_access_tokens` (
 
 CREATE TABLE `students` (
   `id` int(11) NOT NULL,
-  `nis` int(11) NOT NULL,
   `full_name` varchar(50) NOT NULL,
   `prt` float NOT NULL,
   `jak` float NOT NULL,
@@ -210,11 +209,12 @@ CREATE TABLE `students` (
 -- Dumping data untuk tabel `students`
 --
 
-INSERT INTO `students` (`id`, `nis`, `full_name`, `prt`, `jak`, `usia`, `ss`, `kk`, `bp`, `kr`, `hasil`, `created_at`, `updated_at`) VALUES
-(68, 234234, 'Aflah Rafael Yuwono', 0.7, 0.7, 0.9, 0.7, 0.8, 0.7, 0.8, 0.909722, '2024-01-12 12:33:52', '2024-01-12 19:31:31'),
-(69, 5235635, 'Ahmad Fadli Sholihin', 0.8, 0.8, 0.6, 0.7, 0.7, 0.7, 0.8, 0.863889, '2024-01-12 12:33:52', '2024-01-12 19:31:31'),
-(70, 523565, 'Annasya Nabila Syakayla', 0.5, 0.5, 0.6, 0.7, 0.7, 0.8, 0.8, 0.776389, '2024-01-12 12:33:52', '2024-01-12 19:31:31'),
-(71, 287534, 'Elok Shanum Nacita', 0.9, 0.9, 0.8, 0.7, 0.7, 0.7, 0.9, 0.952778, '2024-01-12 12:33:52', '2024-01-12 19:31:31');
+INSERT INTO `students` (`id`, `full_name`, `prt`, `jak`, `usia`, `ss`, `kk`, `bp`, `kr`, `hasil`, `created_at`, `updated_at`) VALUES
+(72, 'Aflah Rafael Yuwono', 0.7, 0.7, 0.9, 0.7, 0.8, 0.7, 0.8, 0.909722, '2024-01-12 12:48:13', '2024-01-12 19:48:09'),
+(73, 'Ahmad Fadli Sholihin', 0.8, 0.8, 0.6, 0.7, 0.7, 0.7, 0.8, 0.863889, '2024-01-12 12:48:13', '2024-01-12 19:48:09'),
+(74, 'Annasya Nabila Syakayla', 0.5, 0.5, 0.6, 0.7, 0.7, 0.8, 0.8, 0.776389, '2024-01-12 12:48:13', '2024-01-12 19:48:09'),
+(75, 'Elok Shanum Nacita', 0.9, 0.9, 0.8, 0.7, 0.7, 0.7, 0.9, 0.952778, '2024-01-12 12:48:13', '2024-01-12 19:48:09'),
+(76, 'dasdas', 0.9, 0.8, 0.7, 0.9, 0.9, 0.8, 1, 0.944444, '2024-01-12 13:16:46', NULL);
 
 -- --------------------------------------------------------
 
@@ -340,7 +340,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT untuk tabel `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
