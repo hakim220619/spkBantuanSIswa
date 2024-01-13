@@ -62,7 +62,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('students/UploadStudents', [StudentsController::class, 'UploadStudents'])->name('students.UploadStudents');
     Route::post('students/addProses', [StudentsController::class, 'addProses'])->name('students.addProses');
     Route::post('students/proses', [StudentsController::class, 'proses'])->name('students.proses');
-    Route::post('students/delete', [StudentsController::class, 'delete'])->name('students.delete');
+    Route::post('students/delete/{id}', [StudentsController::class, 'delete'])->name('students.delete');
+    Route::post('/students/deleteAll', [StudentsController::class, 'deleteAll'])->name('students.deleteAll');
 
     //kriteria
     Route::get('kriteria', [KriteriaController::class, 'view'])->name('kriteria');

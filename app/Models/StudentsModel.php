@@ -10,5 +10,5 @@ class StudentsModel extends Model
     use HasFactory;
     protected $table = "students";
  
-    protected $fillable = ['nis','full_name','prt','jak','usia','ss', 'kk', 'bp', 'kr', 'hasil'];
+    protected $fillable = ['full_name','prt','jak','usia','ss', 'kk', 'bp', 'kr', 'hasil'];
 }

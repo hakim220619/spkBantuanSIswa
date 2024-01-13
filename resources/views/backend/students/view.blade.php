@@ -31,7 +31,7 @@
                 <div class="card-body">
                     <a href="#" data-bs-toggle="modal" data-bs-target="#uploadstudents"
                         class="btn btn-dark waves-effect waves-light ">Uploads</a>
-                    <button class="btn btn-danger waves-effect waves-light" onclick="deleteItem()">Delete</button>
+                    <button class="btn btn-danger waves-effect waves-light" onclick="deleteall()">Delete</button>
                     <a href="#" data-bs-toggle="modal" data-bs-target="#AddStudents"
                         class="btn btn-dark waves-effect waves-light ">Add</a>
                     <button class="btn btn-primary waves-effect waves-light" onclick="Proses()">Proses</button>
@@ -55,6 +55,7 @@
                                         <th>Bobot Pekerjaan</th>
                                         <th>Kondisi Rumah</th>
                                         <th>Hasil</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
 
@@ -148,8 +149,8 @@
                                     <select class="form-control" name="usia" id="sts" required>
                                         <option value="">-- Pilih --</option>
                                         @foreach ($usia as $r)
-                                        <option value="{{ $r->nilai }}">{{ $r->jenis }}
-                                        </option>
+                                            <option value="{{ $r->nilai }}">{{ $r->jenis }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -196,9 +197,9 @@
                                     <select class="form-control" name="kr" id="sts" required>
                                         <option value="">-- Pilih --</option>
                                         @foreach ($kr as $r)
-                                        <option value="{{ $r->nilai }}">{{ $r->jenis }}
-                                        </option>
-                                            @endforeach
+                                            <option value="{{ $r->nilai }}">{{ $r->jenis }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -215,6 +216,7 @@
     </div>
     </div>
     <script>
+
         function Proses() {
             $.ajax({
                 type: 'post',
@@ -250,6 +252,7 @@
                     var no = 1;
                     for (i = 0; i < data.length; i++) {
                         html += '<tr>' +
+                            
                             '<td>' + no++ + '</td>' +
                             '<td>' + data[i].full_name + '</td>' +
                             '<td>' + data[i].prt + '</td>' +
@@ -260,6 +263,7 @@
                             '<td>' + data[i].bp + '</td>' +
                             '<td>' + data[i].kr + '</td>' +
                             '<td>' + data[i].hasil + '</td>' +
+                            '<td>' + "<div class='col-md-4'> <a href='#'' onclick='deleteItem(this)' data-id="+data[i].id+"><i class='fas fa-trash-alt' style='color:red'></i></a></div>" + '</td>' +
                             '</tr>';
                     }
                     // console.log(html);
@@ -269,6 +273,8 @@
         }
 
         function deleteItem(e) {
+            // console.log('asd');
+            let id = e.getAttribute('data-id');
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -289,7 +295,53 @@
                         ),
                         $.ajax({
                             type: 'POST',
-                            url: '{{ url('/students/delete') }}/',
+                            url: '{{ url('/students/delete') }}/' + id,
+                            data: {
+                                "_token": "{{ csrf_token() }}",
+                            },
+                            success: function(data) {
+
+                                if (data.success) {
+
+                                    Swal.fire(
+                                        'Deleted!',
+                                        'Your file has been deleted.',
+                                        "success",
+
+                                    );
+
+                                }
+
+                            }
+                        });
+                }
+                if (result.isConfirmed) show_data();
+            })
+
+        }
+        function deleteall(e) {
+            // console.log('asd');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    setInterval(function() {
+                            location.reload();
+                        }, 30000),
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        ),
+                        $.ajax({
+                            type: 'POST',
+                            url: '{{ url('/students/deleteAll') }}/',
                             data: {
                                 "_token": "{{ csrf_token() }}",
                             },

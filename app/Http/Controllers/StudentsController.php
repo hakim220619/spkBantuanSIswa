@@ -87,8 +87,17 @@ class StudentsController extends Controller
         ]);
         return redirect('students');
     }
-    function delete()
+    function delete($id)
     {
+        // dd($id);
+        DB::table('students')->where('id', $id)->delete();
+        return response()->json([
+            'success' => true
+        ]);
+    }
+    function deleteAll()
+    {
+        // dd($id);
         DB::table('students')->delete();
         return response()->json([
             'success' => true
